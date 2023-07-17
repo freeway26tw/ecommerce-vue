@@ -2,6 +2,7 @@
   "name": "vue3-rabbit",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,7 +19,9 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.39.0",
     "eslint-plugin-vue": "^9.11.0",
+    "sass": "^1.63.6",
     "unplugin-auto-import": "^0.16.6",
+    "unplugin-element-plus": "^0.7.2",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9"
   }
