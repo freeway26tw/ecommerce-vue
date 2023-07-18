@@ -9,7 +9,6 @@ export const useCategoryStore = defineStore('category', () => {
   // action 獲取導航數據的方法
   const getCategory = async () => {
     const res = await getCategoryAPI()
-    console.log(res)
     categoryList.value = res.result
   }
 
