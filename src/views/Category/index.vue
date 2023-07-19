@@ -1,38 +1,10 @@
 <script setup>
-import { getCategoryAPI } from '@/apis/category';
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { getBannerAPI } from '@/apis/home'
 import GoodsItem from '../Home/components/GoodsItem.vue'
-import { onBeforeRouteUpdate } from 'vue-router'
+import { useBanner } from './composables/useBanner.js'
+import { useCategory } from './composables/useCategory.js'
 
-// 取得數據
-const categoryData = ref({})
-const route = useRoute()
-const getCategory = async (id = route.params.id) => {
-  const res = await getCategoryAPI(id)
-  categoryData.value = res.result
-}
-onMounted(() => getCategory())
-
-// 目標: 路由參數變化的時候，可以把重新發送分類API
-onBeforeRouteUpdate((to) => {
-  console.log('router changed')
-  // 存在問題: 使用最新路油的路由參數請求最新的分類數據
-  getCategory(to.params.id)
-})
-
-// 獲取Banner
-const bannerList = ref([])
-
-const getBanner = async () => {
-  const res = await getBannerAPI({
-    distributionSite: '2'
-  })
-  bannerList.value = res.result
-}
-
-onMounted(() => getBanner())
+const { bannerList } = useBanner()
+const { categoryData } = useCategory()
 
 </script>
 
