@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import 'element-plus/theme-chalk/el-message.css'
+import { useUserStore } from '@/stores/user'
 
 const httpInstance = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -10,13 +10,18 @@ const httpInstance = axios.create({
 // axios请求拦截器
 httpInstance.interceptors.request.use(
   (config) => {
+    // 1. 從pinia獲取token數據
+    const userStore = useUserStore()
+    // 2. 按照後端的要求拼接token數據
+    const token = userStore.userInfo.token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
     return config
   },
   // 統一錯誤提示
   (e) => Promise.reject(e)
 )
-
-// 攔截器
 
 // axios响应式拦截器
 httpInstance.interceptors.response.use(
