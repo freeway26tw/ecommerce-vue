@@ -2,6 +2,10 @@
 // 表單檢查 (帳號+密碼)
 
 import { ref } from 'vue'
+import { loginAPI } from '@/apis/user'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+import { useRouter } from 'vue-router'
 
 // 1. 準備表單
 const form = ref({
@@ -35,13 +39,20 @@ const rules = {
 
 // 3. 獲取form instance做統一驗證
 const formRef = ref(null)
+const router = useRouter()
 const doLogin = () => {
+  const { account, password } = form.value
   // 調用instance method
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async(valid) => {
     // valid: 所有表單都通過驗證，才為true
     // 以valid作為判斷條件，如果通過驗證才執行登入流程
     if (valid) {
       // TODO LOGIN
+      const res = await loginAPI({ account, password })
+      // 1. 提示用戶
+      ElMessage({ type: 'success', message: '登入成功'})
+      // 2. 跳轉首頁
+      router.replace({ path: '/'})
     }
   })
 }
