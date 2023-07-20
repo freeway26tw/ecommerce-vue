@@ -2,10 +2,13 @@
 // 表單檢查 (帳號+密碼)
 
 import { ref } from 'vue'
-import { loginAPI } from '@/apis/user'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router'
+
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
 
 // 1. 準備表單
 const form = ref({
@@ -48,7 +51,7 @@ const doLogin = () => {
     // 以valid作為判斷條件，如果通過驗證才執行登入流程
     if (valid) {
       // TODO LOGIN
-      const res = await loginAPI({ account, password })
+      userStore.getUserInfo({ account, password })
       // 1. 提示用戶
       ElMessage({ type: 'success', message: '登入成功'})
       // 2. 跳轉首頁
