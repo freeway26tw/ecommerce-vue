@@ -25,8 +25,12 @@ const { elementX, elementY, isOutside } = useMouseInElement(target)
 // 3. 控制滑動區塊跟著滑鼠移動 (監聽elementX/Y變化，一旦變化就重新設置left/top)
 const left = ref(0)
 const top = ref(0)
-watch([elementX, elementY], () => {
-  console.log('xy變化了')
+
+const positionX = ref(0)
+const positionY = ref(0)
+watch([elementX, elementY, isOutside], () => {
+  // 如果滑鼠沒有移入到盒子裡，直接不執行後面的邏輯
+  if (isOutside.value) return
   // 有效範圍內控制滑動距離
   // 橫向
   if (elementX.value > 100 && elementX.value < 300) {
@@ -43,6 +47,10 @@ watch([elementX, elementY], () => {
 
   if (elementY.value > 300) { top.value = 200 }
   if (elementY.value < 100) { top.value = 0 }
+  
+  // 控制大圖的顯示
+  positionX.value = -left.value * 2
+  positionY.value = -top.value * 2
 })
 
 </script>
@@ -54,7 +62,7 @@ watch([elementX, elementY], () => {
     <div class="middle" ref="target">
       <img :src="imageList[activeIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }"></div>
+      <div class="layer" v-show="!isOutside" :style="{ left: `${left}px`, top: `${top}px` }"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -66,10 +74,10 @@ watch([elementX, elementY], () => {
     <div class="large" :style="[
       {
         backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundPositionX: `${positionX}px`,
+        backgroundPositionY: `${positionY}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
