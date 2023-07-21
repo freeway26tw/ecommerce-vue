@@ -20,9 +20,16 @@ export const useCartStore = defineStore(
         cartList.value.push(good)
       }
     }
+    // 刪除購物車
+    const delCart = (skuId) => {
+      const idx = cartList.value.findIndex((item) => skuId === item.skuId)
+      cartList.value.splice(idx, 1)
+    }
+
     return {
       cartList,
       addCart,
+      delCart
     }
   },
   {
