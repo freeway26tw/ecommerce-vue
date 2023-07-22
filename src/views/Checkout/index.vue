@@ -49,10 +49,7 @@ const createOrder = async () => {
   })
   const orderId = res.result.id
   router.push({
-    path: '/pay',
-    query: {
-      id: orderId
-    }
+    path: `/paycallback/${orderId}`
   })
   // 更新購物車
   cartStore.updateNewList()
