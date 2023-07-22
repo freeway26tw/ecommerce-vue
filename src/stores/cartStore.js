@@ -48,6 +48,13 @@ export const useCartStore = defineStore(
       cartList.value.forEach(item => item.selected = selected)
     }
 
+    // 已選擇數量
+    const selectedCount = computed(() =>
+      cartList.value.filter((item) => item.selected)
+    .reduce((a, c) => a + c.count, 0))
+    //  已選擇數量
+    const selectedPrice = computed(() => cartList.value.filter(item => item.selected).reduce((a, c) => a + c.count * c.price, 0))
+
     return {
       cartList,
       addCart,
@@ -56,7 +63,9 @@ export const useCartStore = defineStore(
       allPrice,
       singleCheck,
       isAll,
-      allCheck
+      allCheck,
+      selectedCount,
+      selectedPrice
     }
   },
   {
