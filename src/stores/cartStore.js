@@ -1,23 +1,35 @@
 // 封裝購物車component
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { useUserStore } from './user'
+import { insertCartAPI, findNewCartListAPI } from '@/apis/cart'
 
 export const useCartStore = defineStore(
   'cart',
   () => {
+    const userStore = useUserStore()
+    const isLogin = computed(() => userStore.userInfo.token)
     // 1. 定義stat┤ - cartList
     const cartList = ref([])
     // 2. 定義action - addcart
-    const addCart = (good) => {
-      // 增加購物車操作
-      // 已經增加過 - count + 1
-      // 沒有增加過 - 直接push
-      const item = cartList.value.find((item) => good.skuId === item.skuId)
-      if (item) {
-        // 有找到
-        item.count++
+    const addCart = async (good) => {
+      const { skuId, count } = good
+      if (isLogin.value) {
+        // 登入之後的加入購物車邏輯
+        await insertCartAPI({ skuId, count})
+        const res = await findNewCartListAPI()
+        cartList.value = res.result
       } else {
-        cartList.value.push(good)
+        // 增加購物車操作
+        // 已經增加過 - count + 1
+        // 沒有增加過 - 直接push
+        const item = cartList.value.find((item) => good.skuId === item.skuId)
+        if (item) {
+          // 有找到
+          item.count++
+        } else {
+          cartList.value.push(good)
+        }
       }
     }
     // 刪除購物車
@@ -34,7 +46,9 @@ export const useCartStore = defineStore(
     }
 
     // 計算屬性
-    const allCount = computed(() => cartList.value.reduce((a, c) => a + c.count, 0))
+    const allCount = computed(() =>
+      cartList.value.reduce((a, c) => a + c.count, 0)
+    )
     const allPrice = computed(() =>
       cartList.value.reduce((a, c) => a + c.count * c.price, 0)
     )
@@ -45,15 +59,21 @@ export const useCartStore = defineStore(
     // 全選功能
     const allCheck = (selected) => {
       // 把cartList中的每一項selected都設置為當前的全選框狀態
-      cartList.value.forEach(item => item.selected = selected)
+      cartList.value.forEach((item) => (item.selected = selected))
     }
 
     // 已選擇數量
     const selectedCount = computed(() =>
-      cartList.value.filter((item) => item.selected)
-    .reduce((a, c) => a + c.count, 0))
+      cartList.value
+        .filter((item) => item.selected)
+        .reduce((a, c) => a + c.count, 0)
+    )
     //  已選擇數量
-    const selectedPrice = computed(() => cartList.value.filter(item => item.selected).reduce((a, c) => a + c.count * c.price, 0))
+    const selectedPrice = computed(() =>
+      cartList.value
+        .filter((item) => item.selected)
+        .reduce((a, c) => a + c.count * c.price, 0)
+    )
 
     return {
       cartList,
@@ -65,7 +85,7 @@ export const useCartStore = defineStore(
       isAll,
       allCheck,
       selectedCount,
-      selectedPrice
+      selectedPrice,
     }
   },
   {
