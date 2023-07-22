@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useUserStore } from './user'
-import { insertCartAPI, findNewCartListAPI } from '@/apis/cart'
+import { insertCartAPI, findNewCartListAPI, delCartAPI } from '@/apis/cart'
 
 export const useCartStore = defineStore(
   'cart',
@@ -11,14 +11,18 @@ export const useCartStore = defineStore(
     const isLogin = computed(() => userStore.userInfo.token)
     // 1. 定義stat┤ - cartList
     const cartList = ref([])
+    // 獲取最新購物車array action
+    const updateNewList = async () => {
+      const res = await findNewCartListAPI()
+      cartList.value = res.result
+    }
     // 2. 定義action - addcart
     const addCart = async (good) => {
       const { skuId, count } = good
       if (isLogin.value) {
         // 登入之後的加入購物車邏輯
-        await insertCartAPI({ skuId, count})
-        const res = await findNewCartListAPI()
-        cartList.value = res.result
+        await insertCartAPI({ skuId, count })
+        updateNewList()
       } else {
         // 增加購物車操作
         // 已經增加過 - count + 1
@@ -33,9 +37,15 @@ export const useCartStore = defineStore(
       }
     }
     // 刪除購物車
-    const delCart = (skuId) => {
-      const idx = cartList.value.findIndex((item) => skuId === item.skuId)
-      cartList.value.splice(idx, 1)
+    const delCart = async (skuId) => {
+      if (isLogin.value) {
+        // 使用cart API delete功能
+        await delCartAPI([skuId])
+        updateNewList()
+      } else {
+        const idx = cartList.value.findIndex((item) => skuId === item.skuId)
+        cartList.value.splice(idx, 1)
+      }
     }
 
     // 單選功能
