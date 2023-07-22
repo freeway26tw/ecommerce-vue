@@ -37,14 +37,26 @@ export const useCartStore = defineStore(
     const allCount = computed(() => cartList.value.reduce((a, c) => a + c.count, 0))
     const allPrice = computed(() =>
       cartList.value.reduce((a, c) => a + c.count * c.price, 0)
-    ) 
+    )
+
+    // 是否全選
+    const isAll = computed(() => cartList.value.every((item) => item.selected))
+
+    // 全選功能
+    const allCheck = (selected) => {
+      // 把cartList中的每一項selected都設置為當前的全選框狀態
+      cartList.value.forEach(item => item.selected = selected)
+    }
+
     return {
       cartList,
       addCart,
       delCart,
       allCount,
       allPrice,
-      singleCheck
+      singleCheck,
+      isAll,
+      allCheck
     }
   },
   {
