@@ -48,6 +48,11 @@ export const useCartStore = defineStore(
       }
     }
 
+    // 清除購物車
+    const clearCart = () => {
+      cartList.value = []
+    }
+
     // 單選功能
     const singleCheck = (skuId, selected) => {
       // 通過skuId找到要修改的對象，然後修改其selected
@@ -96,6 +101,7 @@ export const useCartStore = defineStore(
       allCheck,
       selectedCount,
       selectedPrice,
+      clearCart,
     }
   },
   {
