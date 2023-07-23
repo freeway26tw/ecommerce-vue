@@ -23,10 +23,10 @@ const allCheck = (selected) => {
               <th width="120">
                 <el-checkbox :model-value="cartStore.isAll" @change="allCheck"/>
               </th>
-              <th width="400">商品信息</th>
-              <th width="220">单价</th>
-              <th width="180">数量</th>
-              <th width="180">小计</th>
+              <th width="400">商品訊息</th>
+              <th width="220">單價</th>
+              <th width="180">數量</th>
+              <th width="180">小計</th>
               <th width="140">操作</th>
             </tr>
           </thead>
@@ -58,7 +58,7 @@ const allCheck = (selected) => {
               </td>
               <td class="tc">
                 <p>
-                  <el-popconfirm title="确认删除吗?" confirm-button-text="确认" cancel-button-text="取消" @confirm="delCart(i)">
+                  <el-popconfirm title="確認刪除嗎?" confirm-button-text="對啦" cancel-button-text="取消" @confirm="delCart(i)">
                     <template #reference>
                       <a href="javascript:;">删除</a>
                     </template>
@@ -69,8 +69,8 @@ const allCheck = (selected) => {
             <tr v-if="cartStore.cartList.length === 0">
               <td colspan="6">
                 <div class="cart-none">
-                  <el-empty description="购物车列表为空">
-                    <el-button type="primary">随便逛逛</el-button>
+                  <el-empty description="什麼! 你的購物車竟然是空的! 嘖嘖">
+                    <el-button type="primary">我只是路過的</el-button>
                   </el-empty>
                 </div>
               </td>
@@ -86,7 +86,7 @@ const allCheck = (selected) => {
           <span class="red">NT$ {{ cartStore.selectedPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
-          <el-button size="large" type="primary" @click="$router.push('/checkout')">下单结算</el-button>
+          <el-button size="large" type="primary" @click="$router.push('/checkout')">付錢啦</el-button>
         </div>
       </div>
     </div>

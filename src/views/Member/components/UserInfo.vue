@@ -28,11 +28,11 @@ onMounted(() => getLikeList())
     <div class="item">
       <a href="javascript:;">
         <span class="iconfont icon-hy"></span>
-        <p>会员中心</p>
+        <p>會員中心</p>
       </a>
       <a href="javascript:;">
         <span class="iconfont icon-aq"></span>
-        <p>安全设置</p>
+        <p>安全設定</p>
       </a>
       <a href="javascript:;">
         <span class="iconfont icon-dw"></span>
@@ -43,7 +43,7 @@ onMounted(() => getLikeList())
   <div class="like-container">
     <div class="home-panel">
       <div class="header">
-        <h4 data-v-bcb266e0="">猜你喜欢</h4>
+        <h4 data-v-bcb266e0="">猜你喜歡</h4>
       </div>
       <div class="goods-list">
         <GoodsItem v-for="good in likeList" :key="good.id" :good="good" />

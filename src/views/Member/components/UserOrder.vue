@@ -3,11 +3,11 @@ import { getUserOrder } from '@/apis/order'
 import { onMounted, ref} from 'vue'
 // tab列表
 const tabTypes = [
-  { name: "all", label: "全部订单" },
+  { name: "all", label: "全部訂單" },
   { name: "unpay", label: "待付款" },
-  { name: "deliver", label: "待发货" },
-  { name: "receive", label: "待收货" },
-  { name: "comment", label: "待评价" },
+  { name: "deliver", label: "待出貨" },
+  { name: "receive", label: "待收貨" },
+  { name: "comment", label: "待評價" },
   { name: "complete", label: "已完成" },
   { name: "cancel", label: "已取消" }
 ]
@@ -43,7 +43,7 @@ const fomartPayState = (payState) => {
   const stateMap = {
     1: '待付款',
     2: '待出貨',
-    3: '待收穫',
+    3: '待收貨',
     4: '待評價',
     5: '已完成',
     6: '已取消'
@@ -61,14 +61,14 @@ const fomartPayState = (payState) => {
 
       <div class="main-container">
         <div class="holder-container" v-if="orderList.length === 0">
-          <el-empty description="暂无订单数据" />
+          <el-empty description="暫無訂單數據" />
         </div>
         <div v-else>
           <!-- 订单列表 -->
           <div class="order-item" v-for="order in orderList" :key="order.id">
             <div class="head">
-              <span>下单时间：{{ order.createTime }}</span>
-              <span>订单编号：{{ order.id }}</span>
+              <span>下單時間：{{ order.createTime }}</span>
+              <span>訂單編號：{{ order.id }}</span>
               <!-- 未付款，倒计时时间还有 -->
               <span class="down-time" v-if="order.orderState === 1">
                 <i class="iconfont icon-down-time"></i>
@@ -90,7 +90,7 @@ const fomartPayState = (payState) => {
                         <span>{{ item.attrsText }}</span>
                       </p>
                     </div>
-                    <div class="price">¥{{ item.realPay?.toFixed(2) }}</div>
+                    <div class="price">NT${{ item.realPay?.toFixed(2) }}</div>
                     <div class="count">x{{ item.quantity }}</div>
                   </li>
                 </ul>
@@ -101,32 +101,32 @@ const fomartPayState = (payState) => {
                   <a href="javascript:;" class="green">查看物流</a>
                 </p>
                 <p v-if="order.orderState === 4">
-                  <a href="javascript:;" class="green">评价商品</a>
+                  <a href="javascript:;" class="green">評價商品</a>
                 </p>
                 <p v-if="order.orderState === 5">
-                  <a href="javascript:;" class="green">查看评价</a>
+                  <a href="javascript:;" class="green">查看評價</a>
                 </p>
               </div>
               <div class="column amount">
-                <p class="red">¥{{ order.payMoney?.toFixed(2) }}</p>
-                <p>（含运费：¥{{ order.postFee?.toFixed(2) }}）</p>
-                <p>在线支付</p>
+                <p class="red">NT${{ order.payMoney }}</p>
+                <p>（含運費：NT${{ order.postFee }}）</p>
+                <p>線上支付</p>
               </div>
               <div class="column action">
                 <el-button v-if="order.orderState === 1" type="primary" size="small">
                   立即付款
                 </el-button>
                 <el-button v-if="order.orderState === 3" type="primary" size="small">
-                  确认收货
+                  確認收貨
                 </el-button>
-                <p><a href="javascript:;">查看详情</a></p>
+                <p><a href="javascript:;">查看詳情</a></p>
                 <p v-if="[2, 3, 4, 5].includes(order.orderState)">
-                  <a href="javascript:;">再次购买</a>
+                  <a href="javascript:;">再次購買</a>
                 </p>
                 <p v-if="[4, 5].includes(order.orderState)">
-                  <a href="javascript:;">申请售后</a>
+                  <a href="javascript:;">申請售後</a>
                 </p>
-                <p v-if="order.orderState === 1"><a href="javascript:;">取消订单</a></p>
+                <p v-if="order.orderState === 1"><a href="javascript:;">取消訂單</a></p>
               </div>
             </div>
           </div>

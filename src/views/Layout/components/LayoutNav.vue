@@ -23,19 +23,19 @@ const confirm = () => {
         <template v-if="userStore.userInfo.token">
           <li><a href="javascript:;"><i class=" iconfont icon-user"></i>{{ userStore.userInfo.account }}</a></li>
           <li>
-            <el-popconfirm @confirm="confirm" title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+            <el-popconfirm @confirm="confirm" title="確認登出嗎?" confirm-button-text="對的" cancel-button-text="取消">
               <template #reference>
-                <a href="javascript:;">退出登录</a>
+                <a href="javascript:;">登出</a>
               </template>
             </el-popconfirm>
           </li>
-          <li><a href="javascript:;">我的订单</a></li>
-          <li><a href="javascript:;">会员中心</a></li>
+          <li><a href="javascript:;">我的訂單</a></li>
+          <li><a href="javascript:;">會員中心</a></li>
         </template>
         <template v-else>
-          <li><a href="javascript:;" @click="$router.push('/login')">请先登录</a></li>
-          <li><a href="javascript:;">帮助中心</a></li>
-          <li><a href="javascript:;">关于我们</a></li>
+          <li><a href="javascript:;" @click="$router.push('/login')">請先登入</a></li>
+          <li><a href="javascript:;">幫助中心</a></li>
+          <li><a href="javascript:;">關於我們</a></li>
         </template>
       </ul>
     </div>

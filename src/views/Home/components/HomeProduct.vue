@@ -20,7 +20,7 @@ onMounted(() => getGoods())
         <RouterLink class="cover" to="/">
           <img v-img-lazy="cate.picture" />
           <strong class="label">
-            <span>{{ cate.name }}馆</span>
+            <span>{{ cate.name }}館</span>
             <span>{{ cate.saleInfo }}</span>
           </strong>
         </RouterLink>

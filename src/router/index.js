@@ -68,14 +68,14 @@ const router = createRouter({
             {
               path: '',
               name: 'user',
-              component: UserInfo
+              component: UserInfo,
             },
             {
               path: 'order',
               name: 'order',
-              component: UserOrder
-            }
-          ]
+              component: UserOrder,
+            },
+          ],
         },
       ],
     },
@@ -83,6 +83,15 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/views/404/index.vue'),
     },
   ],
   // 路由滾動行為訂製

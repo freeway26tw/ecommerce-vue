@@ -29,7 +29,7 @@ const { categoryData } = useCategory()
       </el-carousel>
     </div>
     <div class="sub-list">
-      <h3>全部分类</h3>
+      <h3>全部分類</h3>
       <ul>
         <li v-for="i in categoryData.children" :key="i.id">
           <RouterLink :to="`/category/sub/${i.id}`">
