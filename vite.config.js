@@ -7,7 +7,10 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 导入对应包
 import ElementPlus from 'unplugin-element-plus/vite'
 export default defineConfig({
-  publicPath: '/ecommerce-vue/',
+  base: '/ecommerce-vue/',
+  build: {
+    outDir: "docs"
+  },
   plugins: [
     vue(),
     AutoImport({
