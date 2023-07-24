@@ -3,8 +3,8 @@ import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/stores/user'
 import router from '@/router'
 const httpInstance = axios.create({
-  baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
-  timeout: 5000
+  baseURL: 'https://ecommerce-vg1b.onrender.com/api',
+  timeout: 5000,
 })
 
 // axios请求拦截器
