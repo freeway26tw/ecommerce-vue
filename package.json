@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "homepage" : "https://freeway26tw.github.io/ecommerce-vue/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "npm run build && node ./deploy/ghpages.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
@@ -21,6 +23,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.39.0",
     "eslint-plugin-vue": "^9.11.0",
+    "gh-pages": "^5.0.0",
     "sass": "^1.63.6",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-element-plus": "^0.7.2",
