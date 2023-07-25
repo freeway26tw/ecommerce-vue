@@ -31,7 +31,7 @@ const { categoryData } = useCategory()
     <div class="sub-list">
       <h3>全部分類</h3>
       <ul>
-        <li v-for="i in categoryData.children" :key="i.id">
+        <li v-for="i in categoryData.SubCategory" :key="i.id">
           <RouterLink :to="`/category/sub/${i.id}`">
             <img :src="i.picture" />
             <p>{{ i.name }}</p>
@@ -39,7 +39,7 @@ const { categoryData } = useCategory()
         </li>
       </ul>
     </div>
-  <div class="ref-goods" v-for="item in categoryData.children" :key="item.id">
+  <div class="ref-goods" v-for="item in categoryData.SubCategory" :key="item.id">
     <div class="head">
       <h3>- {{ item.name }}-</h3>
     </div>
