@@ -34,4 +34,7 @@ Click checkout method, you will be directed to the page
 
 Finally, don't forget to login before you checkout.
 
+* Demo account: rabbit
+* Demo password: titaner
+
 ![image](./public/login.png)
