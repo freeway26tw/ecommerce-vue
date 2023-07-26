@@ -1,35 +1,37 @@
-# vue3-rabbit
+# Ecommerce Website built by Vue3
 
-This template should help get you started developing with Vue 3 in Vite.
+The project is deployed on [github page](https://freeway26tw.github.io/ecommerce-vue/)
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Use can browse categories and banners from the home page.
 
-## Customize configuration
+![image](./public/home.png)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Also the new and hot products
 
-## Project Setup
+![image](./public/home_new_hot.png)
 
-```sh
-npm install
-```
+Entering the product page, use can view pictures of the product
 
-### Compile and Hot-Reload for Development
+![image](./public/product.png)
 
-```sh
-npm run dev
-```
+Also the details
 
-### Compile and Minify for Production
+![image](./public/product_detail.png)
 
-```sh
-npm run build
-```
+If you want to view the picture closely, just hover over the picture
 
-### Lint with [ESLint](https://eslint.org/)
+![image](./public/product_zoomin.png)
 
-```sh
-npm run lint
-```
+After adding the product into the cart, you can see what you collected from here
+
+![image](./public/cart.png)
+
+Click checkout method, you will be directed to the page
+
+![image](./public/cart_checkout.png)
+
+Finally, don't forget to login before you checkout.
+
+![image](./public/login.png)
